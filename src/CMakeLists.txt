@@ -1,9 +1,17 @@
 cmake_minimum_required(VERSION 3.5)
 project(ncnn_gfpgan-vulkan)
+
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pie -fPIE -fPIC -Wall -O3")
 
+
+find_package(Threads)
+find_package(Vulkan REQUIRED)
+
+find_program(GLSLANGVALIDATOR_EXECUTABLE NAMES glslangValidator PATHS $ENV{VULKAN_SDK}/bin NO_CMAKE_FIND_ROOT_PATH)
+message(STATUS "Found glslangValidator: ${GLSLANGVALIDATOR_EXECUTABLE}")
 
 find_package(OpenCV REQUIRED)
 if (OpenCV_FOUND)

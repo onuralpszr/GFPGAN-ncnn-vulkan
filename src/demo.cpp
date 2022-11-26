@@ -1,12 +1,5 @@
-#include <vector>
-#include <ostream>
-#include <random>
-#include <chrono>
-#include <stdio.h>
-#include <fstream>
-#include <opencv2/opencv.hpp>
-#include "net.h"
-#include "cpu.h"
+#include <cstdio>
+#include <net.h>
 #include "gfpgan.h"
 #include "face.h"
 #include "realesrgan.h"

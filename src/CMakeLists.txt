@@ -2,9 +2,12 @@ cmake_minimum_required(VERSION 3.5)
 project(ncnn_gfpgan-vulkan)
 
 set(CMAKE_BUILD_TYPE Release)
-set(CMAKE_CXX_STANDARD 11)
+
+# -------------- Support C++17 for using filesystem  ------------------#
+# https://cmake.org/cmake/help/latest/prop_tgt/CXX_STANDARD.html
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pie -fPIE -fPIC -Wall -O3")
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(USE_SYSTEM_NCNN "build with system libncnn" OFF)
 option(USE_SYSTEM_WEBP "build with system libwebp" OFF)

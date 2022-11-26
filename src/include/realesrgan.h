@@ -5,7 +5,7 @@
 #include <ostream>
 #include <random>
 #include <chrono>
-#include <stdio.h>
+#include <cstdio>
 #include <fstream>
 #include <opencv2/opencv.hpp>
 //ncnn

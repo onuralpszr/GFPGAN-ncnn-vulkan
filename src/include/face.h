@@ -1,7 +1,7 @@
 #ifndef FACE_H
 #define FACE_H
-#include <float.h>
-#include <stdio.h>
+#include <cfloat>
+#include <cstdio>
 #include <vector>
 #include <cmath>
 #include <opencv2/core/core.hpp>

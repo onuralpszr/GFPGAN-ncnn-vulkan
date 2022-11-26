@@ -1,17 +1,16 @@
-# GFPGAN-ncnn  
-a naive ncnn implementation of **GFPGAN aims at developing Practical Algorithms for Real-world Face Restoration**  
-## model support:  
-### 1.GFPGANCleanv1-NoCE-C2 
-All models are available in [Baidu Pan](https://pan.baidu.com/s/1zbVwK7kh6uVfWgq9AZDJDA) (i4xb)  
+# GFPGAN-ncnn-vulkan :construction:
 
-### TODO:  
-1.~~whole image restore~~  
-2.support ncnn-vulkan  
-3.model with colorization
-## Result 
-![](images/result_1.jpg)  
-![](images/result_2.jpg)  
-![](images/result_3.jpg)  
+Ncnn with Vulkan implementation of **GFPGAN aims at developing Practical Algorithms for Real-world Face Restoration**
+
+## :construction: Important Note :construction:
+This project still under heavy development and may not work all the time, until I reach certain stability with or without Vulkan I don't release or remove this section
+
+## Model support:  
+### 1.GFPGANCleanv1-NoCE-C2
+
+### TODO: :bookmark_tabs:
+1. Support ncnn-vulkan  
+2. Model with colorization
 
 ## Reference  
 1.https://github.com/xinntao/Real-ESRGAN  

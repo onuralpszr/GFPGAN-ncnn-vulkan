@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "gfpgan-ncnn-models"
+version = "0.1.0"
+description = ""
+authors = ["Onuralp SEZER <thunderbirdtr@fedoraproject.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "^1.13.0"
+torchvision = "^0.14.0"
+torchaudio = "^0.13.0"
+onnxsim = "^0.4.10"
+onnxruntime = "^1.13.1"
+opencv-python = "^4.6.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

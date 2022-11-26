@@ -1,0 +1,4 @@
+# ignoring pth and onnx files (too big)
+GFPGANCleanv1-NoCE-C2.pth
+GFPGANv1.2-sim.onnx
+GFPGANv1.2.onnx

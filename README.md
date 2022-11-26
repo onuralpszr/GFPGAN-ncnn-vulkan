@@ -6,13 +6,12 @@ All models are available in [Baidu Pan](https://pan.baidu.com/s/1zbVwK7kh6uVfWgq
 
 ### TODO:  
 1.~~whole image restore~~  
-2.windows gui demo  
-3.support ncnn-vulkan  
-4.model with colorization
+2.support ncnn-vulkan  
+3.model with colorization
 ## Result 
-![](result_1.jpg)  
-![](result_2.jpg)  
-![](result_3.jpg)  
+![](images/result_1.jpg)  
+![](images/result_2.jpg)  
+![](images/result_3.jpg)  
 
 ## Reference  
 1.https://github.com/xinntao/Real-ESRGAN  

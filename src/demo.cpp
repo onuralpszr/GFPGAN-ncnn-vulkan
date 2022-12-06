@@ -4,7 +4,7 @@
 #include "face.h"
 #include "realesrgan.h"
 
-#define RESTORE_WHOLE_IMAGE 0   //0-only restore face, 1-restore whole image
+#define RESTORE_WHOLE_IMAGE 1   //0-only restore face, 1-restore whole image
 
 static void to_ocv( const ncnn::Mat& result, cv::Mat& out)
 {

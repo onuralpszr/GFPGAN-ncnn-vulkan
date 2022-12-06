@@ -21,3 +21,8 @@ This project still under heavy development and may not work all the time, until 
 3. https://github.com/Tencent/ncnn  
 4. https://github.com/deepcam-cn/yolov5-face 
 5. https://github.com/FeiGeChuanShu/GFPGAN-ncnn
+
+
+## Download Model files (GFPGAN-ncnn model files) 
+
+https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/releases/download/v0.0.1-models/GFPGAN-ncnn-models.zip

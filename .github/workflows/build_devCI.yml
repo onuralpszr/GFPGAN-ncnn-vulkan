@@ -1,0 +1,34 @@
+name: CI
+on: [push, pull_request]
+
+
+
+jobs:
+
+  dev-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: cache-vulkansdk
+      id: cache-vulkansdk
+      uses: actions/cache@v1
+      with:
+        path: "1.3.231.2"
+        key: vulkansdk-linux-x86_64-1.3.231.2
+    - name: setup-vulkansdk
+      if: steps.cache-vulkansdk.outputs.cache-hit != 'true'
+      run: |
+        wget https://sdk.lunarg.com/sdk/download/1.3.231.2/linux/vulkansdk-linux-x86_64-1.3.231.2.tar.gz?Human=true -O vulkansdk-linux-x86_64-1.3.231.2.tar.gz
+        tar -xf vulkansdk-linux-x86_64-1.3.231.2.tar.gz
+        rm -rf 1.3.231.2/source 1.3.231.2/samples
+        find 1.3.231.2 -type f | grep -v -E 'vulkan|glslang' | xargs rm
+    - name: build
+      run: |
+        sudo apt update
+        sudo apt install libopencv-dev python3-opencv
+        export VULKAN_SDK=`pwd`/1.3.231.2/x86_64
+        mkdir build && cd build
+        cmake ../src
+        cmake --build . -j 2

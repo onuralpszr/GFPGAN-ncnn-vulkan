@@ -10,9 +10,9 @@ This project still under heavy development and may not work all the time, until 
 1. GFPGANCleanv1-NoCE-C2
 
 ### TODO: :bookmark_tabs:
-1. Support ncnn-vulkan  
-2. Convert pth->onnx->ncnn stably without error 
-3. Model with colorization
+- [x] Support ncnn-vulkan
+- [ ] Convert pth->onnx->ncnn stably without error 
+- [ ] Model with colorization
 
 ### Reference  
 1. https://github.com/xinntao/Real-ESRGAN  

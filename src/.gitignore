@@ -3,6 +3,7 @@ GFPGANCleanv1-NoCE-C2.pth
 GFPGANv1.2-sim.onnx
 GFPGANv1.2.onnx
 ncnn-gfpgan-vulkan
+gfpgan-ncnn-vulkan
 models/
 gfpgan-ncnn-models/
 

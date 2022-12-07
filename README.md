@@ -1,5 +1,11 @@
 # GFPGAN-ncnn-vulkan :construction:
 
+![CI](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/workflows/CI/badge.svg)
+![GitHub](https://img.shields.io/github/license/onuralpszr/GFPGAN-ncnn-vulkan?color=red)
+[![Open issue](https://img.shields.io/github/issues/onuralpszr/GFPGAN-ncnn-vulkan)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/issues)
+[![Closed issue](https://img.shields.io/github/issues-closed/onuralpszr/GFPGAN-ncnn-vulkan)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/issues)
+![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/onuralpszr/GFPGAN-ncnn-vulkan)
+
 Ncnn with Vulkan implementation of **GFPGAN aims at developing Practical Algorithms for Real-world Face Restoration**
 
 ## :construction: Important Note :construction:

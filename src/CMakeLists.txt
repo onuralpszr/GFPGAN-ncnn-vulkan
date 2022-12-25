@@ -13,10 +13,6 @@ option(USE_SYSTEM_NCNN "build with system libncnn" OFF)
 option(USE_SYSTEM_WEBP "build with system libwebp" OFF)
 
 
-set(NCNN_OPENMP ON)
-set(NCNN_THREADS ON)
-set(NCNN_SHARED_LIB OFF)
-set(NCNN_SYSTEM_GLSLANG OFF)
 
 find_package(Threads)
 find_package(Vulkan REQUIRED)
@@ -67,6 +63,12 @@ if(NOT USE_SYSTEM_NCNN)
     option(NCNN_BUILD_EXAMPLES "" OFF)
     option(NCNN_DISABLE_RTTI "" OFF)
     option(NCNN_DISABLE_EXCEPTION "" OFF)
+
+    option(NCNN_THREADS "" ON)
+    option(NCNN_OPENMP "" ON)
+    option(NCNN_SYSTEM_GLSLANG "" OFF)
+    option(NCNN_SHARED_LIB "" OFF)
+
 
 
     add_subdirectory(ncnn)

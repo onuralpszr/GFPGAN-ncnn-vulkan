@@ -6,13 +6,10 @@
 
 #define RESTORE_WHOLE_IMAGE 1   //0-only restore face, 1-restore whole image
 
-static void to_ocv( const ncnn::Mat& result, cv::Mat& out)
-{
+static void to_ocv(const ncnn::Mat &result, cv::Mat &out) {
     cv::Mat cv_result_32F = cv::Mat::zeros(cv::Size(512, 512), CV_32FC3);
-    for (int i = 0; i < result.h; i++)
-    {
-        for (int j = 0; j < result.w; j++)
-        {
+    for (int i = 0; i < result.h; i++) {
+        for (int j = 0; j < result.w; j++) {
             cv_result_32F.at<cv::Vec3f>(i, j)[2] = (result.channel(0)[i * result.w + j] + 1) / 2;
             cv_result_32F.at<cv::Vec3f>(i, j)[1] = (result.channel(1)[i * result.w + j] + 1) / 2;
             cv_result_32F.at<cv::Vec3f>(i, j)[0] = (result.channel(2)[i * result.w + j] + 1) / 2;
@@ -27,8 +24,8 @@ static void to_ocv( const ncnn::Mat& result, cv::Mat& out)
 }
 
 #if RESTORE_WHOLE_IMAGE
-static void paste_faces_to_input_image(const cv::Mat& restored_face,cv::Mat& trans_matrix_inv,cv::Mat& bg_upsample)
-{
+
+static void paste_faces_to_input_image(const cv::Mat &restored_face, cv::Mat &trans_matrix_inv, cv::Mat &bg_upsample) {
     trans_matrix_inv.at<float>(0, 2) += 1.0;
     trans_matrix_inv.at<float>(1, 2) += 1.0;
 
@@ -54,36 +51,35 @@ static void paste_faces_to_input_image(const cv::Mat& restored_face,cv::Mat& tra
     cv::Mat inv_soft_mask;
     cv::GaussianBlur(inv_mask_center, inv_soft_mask, cv::Size(blur_size + 1, blur_size + 1), 0, 0, 4);
 
-    for (int h = 0; h < bg_upsample.rows; h++)
-    {
-        for (int w = 0; w < bg_upsample.cols; w++)
-        {
+    for (int h = 0; h < bg_upsample.rows; h++) {
+        for (int w = 0; w < bg_upsample.cols; w++) {
             float alpha = inv_soft_mask.at<uchar>(h, w) / 255.0;
-            bg_upsample.at<cv::Vec3b>(h, w)[0] = pasted_face.at<cv::Vec3b>(h, w)[0] * alpha + (1 - alpha) * bg_upsample.at<cv::Vec3b>(h, w)[0];
-            bg_upsample.at<cv::Vec3b>(h, w)[1] = pasted_face.at<cv::Vec3b>(h, w)[1] * alpha + (1 - alpha) * bg_upsample.at<cv::Vec3b>(h, w)[1];
-            bg_upsample.at<cv::Vec3b>(h, w)[2] = pasted_face.at<cv::Vec3b>(h, w)[2] * alpha + (1 - alpha) * bg_upsample.at<cv::Vec3b>(h, w)[2];
+            bg_upsample.at<cv::Vec3b>(h, w)[0] =
+                    pasted_face.at<cv::Vec3b>(h, w)[0] * alpha + (1 - alpha) * bg_upsample.at<cv::Vec3b>(h, w)[0];
+            bg_upsample.at<cv::Vec3b>(h, w)[1] =
+                    pasted_face.at<cv::Vec3b>(h, w)[1] * alpha + (1 - alpha) * bg_upsample.at<cv::Vec3b>(h, w)[1];
+            bg_upsample.at<cv::Vec3b>(h, w)[2] =
+                    pasted_face.at<cv::Vec3b>(h, w)[2] * alpha + (1 - alpha) * bg_upsample.at<cv::Vec3b>(h, w)[2];
         }
     }
 }
+
 #endif
 
-int main(int argc, char** argv)
-{
-    if (argc != 2)
-    {
+int main(int argc, char **argv) {
+    if (argc != 2) {
         fprintf(stderr, "Usage: %s [imagepath]\n", argv[0]);
         return -1;
     }
 
-    const char* imagepath = argv[1];
+    const char *imagepath = argv[1];
 
     cv::Mat img = cv::imread(imagepath, 1);
-    if (img.empty())
-    {
+    if (img.empty()) {
         fprintf(stderr, "cv::imread %s failed\n", imagepath);
         return -1;
     }
-    
+
     GFPGAN gfpgan;
     gfpgan.load("./models/encoder.param", "./models/encoder.bin", "./models/style.bin");
 
@@ -103,8 +99,7 @@ int main(int argc, char** argv)
     face_detector.detect(img, objects);
     face_detector.align_warp_face(img, objects, trans_matrix_inv, trans_img);
 
-    for (size_t i = 0; i < objects.size(); i++)
-    {
+    for (size_t i = 0; i < objects.size(); i++) {
         ncnn::Mat gfpgan_result;
         gfpgan.process(trans_img[i], gfpgan_result);
 
@@ -114,7 +109,7 @@ int main(int argc, char** argv)
         paste_faces_to_input_image(restored_face, trans_matrix_inv[i], bg_upsample);
 
     }
-    cv::imwrite("result.png",bg_upsample);
+    cv::imwrite("result.png", bg_upsample);
 #else
     ncnn::Mat gfpgan_result;
     gfpgan.process(img, gfpgan_result);
@@ -124,7 +119,7 @@ int main(int argc, char** argv)
     cv::imwrite("result.png",restored_face);
 #endif
 
-    
+
     //cv::imshow("up", bg_upsample);
     //cv::waitKey();
 

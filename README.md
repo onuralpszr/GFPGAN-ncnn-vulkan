@@ -18,7 +18,7 @@ This project still under heavy development and may not work all the time, until 
 
 ### TODO: :bookmark_tabs:
 - [x] Support ncnn-vulkan
-- [ ] Convert pth->onnx->ncnn stably without error 
+- [ ] Convert pth->onnx->ncnn
 - [ ] Model with colorization
 
 ### Reference  

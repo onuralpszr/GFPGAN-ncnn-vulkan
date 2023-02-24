@@ -63,7 +63,6 @@ if(NOT USE_SYSTEM_NCNN)
     option(NCNN_BUILD_EXAMPLES "" OFF)
     option(NCNN_DISABLE_RTTI "" OFF)
     option(NCNN_DISABLE_EXCEPTION "" OFF)
-
     option(NCNN_THREADS "" ON)
     option(NCNN_OPENMP "" ON)
     option(NCNN_SYSTEM_GLSLANG "" OFF)

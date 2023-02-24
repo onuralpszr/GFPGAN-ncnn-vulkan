@@ -42,6 +42,12 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+src/.idea/**/workspace.xml
+src/.idea/**/tasks.xml
+src/.idea/**/usage.statistics.xml
+src/.idea/**/dictionaries
+src/.idea/**/shelf  
+
 # AWS User-specific
 .idea/**/aws.xml
 
@@ -111,7 +117,12 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 
-cmake-build-debug/*
-cmake-build-relwithdebinfo/*
-cmake-build-minsizerel/*
-cmake-build-release/*
+[Cc]make-build-debug/*
+[Cc]mke-build-relwithdebinfo/*
+[Cc]mke-build-minsizerel/*
+[Cc]make-build-release/*
+[Bb]uild/
+
+# Clangd 
+src/.cache/
+

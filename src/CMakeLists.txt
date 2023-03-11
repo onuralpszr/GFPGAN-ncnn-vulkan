@@ -3,19 +3,19 @@ project(gfpgan-ncnn-vulkan)
 
 set(CMAKE_BUILD_TYPE Release)
 
-# -------------- Support C++17 for using filesystem  ------------------#
+# -------------- Support C++20 for using filesystem  ------------------#
 # https://cmake.org/cmake/help/latest/prop_tgt/CXX_STANDARD.html
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
-set(CMAKE_CXX_CLANG_TIDY
-        clang-tidy;
-        -header-filter=.;
-        -checks=*;
-        -warnings-as-errors=*;)
+# set(CMAKE_CXX_CLANG_TIDY
+#         clang-tidy;
+#         -header-filter=.;
+#         -checks=*;
+#         -warnings-as-errors=*;)
 
-set_target_properties(${target} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_PROGRAM}")
+# set_target_properties(${target} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_PROGRAM}")
 
 option(USE_SYSTEM_NCNN "build with system libncnn" OFF)
 option(USE_SYSTEM_WEBP "build with system libwebp" OFF)
@@ -118,7 +118,7 @@ endif()
 set(NCNN_GFPGAN_LINK_LIBRARIES ncnn webp ${Vulkan_LIBRARY})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/)
+#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/)
 
 add_executable(gfpgan-ncnn-vulkan demo.cpp gfpgan.cpp face.cpp realesrgan.cpp)
 target_link_libraries(gfpgan-ncnn-vulkan ${NCNN_GFPGAN_LINK_LIBRARIES} ${OpenCV_LIBS} -static-libstdc++)

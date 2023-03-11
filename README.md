@@ -1,4 +1,4 @@
-# GFPGAN-ncnn-vulkan :construction:
+# GFPGAN-ncnn-vulkan 🚀
 
 ![CI](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/workflows/CI/badge.svg)
 ![GitHub](https://img.shields.io/github/license/onuralpszr/GFPGAN-ncnn-vulkan?color=red)
@@ -26,7 +26,7 @@ git submodule update --init --recursive
 git clone --recursive https://github.com/onuralpszr/GFPGAN-ncnn-vulkan.git
 ```
 
-## Project Prerequisites
+## Project Prerequisites ⚙️  
 
 - CMake version 3.20 or later
 - C++17 or above with filesystem support
@@ -39,7 +39,7 @@ git clone --recursive https://github.com/onuralpszr/GFPGAN-ncnn-vulkan.git
 - ncnn library
 - libwebp library
 
-## Building
+## Building 🛠️
 
 Configure and build
 

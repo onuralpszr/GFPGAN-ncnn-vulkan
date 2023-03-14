@@ -5,6 +5,7 @@
 #include "realesrgan.h"
 
 #define RESTORE_WHOLE_IMAGE 1   //0-only restore face, 1-restore whole image
+#define RESTORE_IMAGE_COLOR 0   //0-no color image, 1-coloring grayscale images
 
 static void to_ocv(const ncnn::Mat &result, cv::Mat &out) {
     cv::Mat cv_result_32F = cv::Mat::zeros(cv::Size(512, 512), CV_32FC3);
@@ -32,11 +33,14 @@ static void paste_faces_to_input_image(const cv::Mat &restored_face, cv::Mat &tr
     cv::Mat inv_restored;
     cv::warpAffine(restored_face, inv_restored, trans_matrix_inv, bg_upsample.size(), 1, 0);
     cv::Mat mask = cv::Mat::ones(cv::Size(512, 512), CV_8UC1) * 255;
+
     cv::Mat inv_mask;
     cv::warpAffine(mask, inv_mask, trans_matrix_inv, bg_upsample.size(), 1, 0);
+
     cv::Mat inv_mask_erosion;
     cv::Mat kernel = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(4, 4));
     cv::erode(inv_mask, inv_mask_erosion, kernel);
+
     cv::Mat pasted_face;
     cv::bitwise_and(inv_restored, inv_restored, pasted_face, inv_mask_erosion);
 
@@ -44,6 +48,7 @@ static void paste_faces_to_input_image(const cv::Mat &restored_face, cv::Mat &tr
     int w_edge = int(std::sqrt(total_face_area) / 20);
     int erosion_radius = w_edge * 2;
     cv::Mat inv_mask_center;
+    
     kernel = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(erosion_radius, erosion_radius));
     cv::erode(inv_mask_erosion, inv_mask_center, kernel);
 

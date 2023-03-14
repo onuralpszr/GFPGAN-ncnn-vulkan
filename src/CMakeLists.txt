@@ -118,9 +118,9 @@ endif()
 set(NCNN_GFPGAN_LINK_LIBRARIES ncnn webp ${Vulkan_LIBRARY})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/)
 
-add_executable(gfpgan-ncnn-vulkan demo.cpp gfpgan.cpp face.cpp realesrgan.cpp)
-target_link_libraries(gfpgan-ncnn-vulkan ${NCNN_GFPGAN_LINK_LIBRARIES} ${OpenCV_LIBS} -static-libstdc++)
+
+add_executable(gfpgan-ncnn-vulkan gfpgan-ncnn-vulkan-demo.cpp gfpgan.cpp face.cpp realesrgan.cpp)
+target_link_libraries(gfpgan-ncnn-vulkan ${NCNN_GFPGAN_LINK_LIBRARIES} ${OpenCV_LIBS})
 
 

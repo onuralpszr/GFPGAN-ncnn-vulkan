@@ -16,7 +16,7 @@ The goal of this project is to develop practical algorithms that can restore the
 
 
 ## Get Submodules
-Make sure submodules are initialized and updated 
+Make sure submodules are initialized and updated
 ```sh
 git submodule update --init --recursive
 ```
@@ -27,7 +27,7 @@ git submodule update --init --recursive
 git clone --recursive https://github.com/onuralpszr/GFPGAN-ncnn-vulkan.git
 ```
 
-## Project Prerequisites ⚙️  
+## Project Prerequisites ⚙️
 
 - CMake version 3.20 or later
 - C++17 or above with filesystem support
@@ -59,17 +59,20 @@ cmake --build . --parallel $(($(nproc) - 1))
 - [ ] Convert pth->onnx->ncnn
 - [ ] Model with colorization
 
-### Reference  
-1. https://github.com/xinntao/Real-ESRGAN  
-2. https://github.com/TencentARC/GFPGAN  
-3. https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan  
-3. https://github.com/Tencent/ncnn  
-4. https://github.com/deepcam-cn/yolov5-face 
-5. https://github.com/derronqi/yolov7-face
-6. https://github.com/derronqi/yolov8-face
-7. https://github.com/FeiGeChuanShu/GFPGAN-ncnn
+### Reference
+1. https://github.com/xinntao/Real-ESRGAN
+2. https://github.com/TencentARC/GFPGAN
+3. https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan
+3. https://github.com/Tencent/ncnn
+4. https://github.com/Tencent/ncnn/tree/master/tools/pnnx
+5. https://github.com/pnnx/pnnx
+6. https://github.com/deepcam-cn/yolov5-face
+7. https://github.com/derronqi/yolov7-face
+8. https://github.com/derronqi/yolov8-face
+9. https://github.com/FeiGeChuanShu/GFPGAN-ncnn
+10. https://github.com/ultralytics/ultralytics
 
 
-## Download Model files (GFPGAN-ncnn model files) 
+## Download Model files (GFPGAN-ncnn model files)
 
 https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/releases/download/v0.0.1-models/GFPGAN-ncnn-models.zip

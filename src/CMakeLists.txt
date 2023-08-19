@@ -3,7 +3,7 @@ project(gfpgan-ncnn-vulkan)
 
 set(CMAKE_BUILD_TYPE Release)
 
-# -------------- Support C++20 for using filesystem  ------------------#
+# -------------- Support C++17 for using filesystem  ------------------#
 # https://cmake.org/cmake/help/latest/prop_tgt/CXX_STANDARD.html
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -122,5 +122,3 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(gfpgan-ncnn-vulkan gfpgan-ncnn-vulkan-demo.cpp gfpgan.cpp face.cpp realesrgan.cpp)
 target_link_libraries(gfpgan-ncnn-vulkan ${NCNN_GFPGAN_LINK_LIBRARIES} ${OpenCV_LIBS})
-
-

@@ -9,7 +9,7 @@ on: [push, pull_request]
 
 env:
   APPLICATION_NAME: gfpgan-ncnn-vulkan
-  
+
 jobs:
 
   setup:
@@ -24,7 +24,7 @@ jobs:
     - name: get-version
       id: get_version
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-  
+
   dev-build:
     runs-on: ubuntu-latest
     steps:

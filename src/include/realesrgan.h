@@ -33,7 +33,7 @@ public:
     const float norm_vals[3] = { 1 / 255.0f, 1 / 255.0f, 1 / 255.0f };
 private:
     ncnn::Net net;
-    
+
 };
 
 #endif // REALESRGAN_H

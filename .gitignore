@@ -46,7 +46,7 @@ src/.idea/**/workspace.xml
 src/.idea/**/tasks.xml
 src/.idea/**/usage.statistics.xml
 src/.idea/**/dictionaries
-src/.idea/**/shelf  
+src/.idea/**/shelf
 
 # AWS User-specific
 .idea/**/aws.xml
@@ -67,6 +67,9 @@ src/.idea/**/shelf
 .idea/**/gradle.xml
 .idea/**/libraries
 
+src/.idea/**/
+src/.idea/codeStyles/Project.xml
+src/.idea/codeStyles/codeStyleConfig.xml
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
@@ -123,6 +126,14 @@ fabric.properties
 [Cc]make-build-release/*
 [Bb]uild/
 
-# Clangd 
+# Clangd
 src/.cache/
 
+# ignoring pth and onnx files (too big)
+GFPGANCleanv1-NoCE-C2.pth
+GFPGANv1.2-sim.onnx
+GFPGANv1.2.onnx
+ncnn-gfpgan-vulkan
+gfpgan-ncnn-vulkan
+models/
+gfpgan-ncnn-models/

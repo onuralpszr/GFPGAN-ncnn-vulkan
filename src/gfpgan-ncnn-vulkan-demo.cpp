@@ -48,7 +48,7 @@ static void paste_faces_to_input_image(const cv::Mat &restored_face, cv::Mat &tr
     int w_edge = int(std::sqrt(total_face_area) / 20);
     int erosion_radius = w_edge * 2;
     cv::Mat inv_mask_center;
-    
+
     kernel = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(erosion_radius, erosion_radius));
     cv::erode(inv_mask_erosion, inv_mask_center, kernel);
 
@@ -118,7 +118,7 @@ int main(int argc, char **argv) {
 #else
     ncnn::Mat gfpgan_result;
     gfpgan.process(img, gfpgan_result);
-    
+
     cv::Mat restored_face;
     to_ocv(gfpgan_result, restored_face);
     cv::imwrite("result.png",restored_face);

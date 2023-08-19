@@ -1,3 +1,5 @@
+# https://commitlint.js.org/#/guides-ci-setup
+
 name: Conventional Commits
 on: [push, pull_request]
 
@@ -8,16 +10,24 @@ jobs:
 
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v3.5.3
         with:
           fetch-depth: 0
+      
+      - name: Install Node.js 🔧
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
       - name: Install Commit Linting Tool 🔧
-        run: npm install --save-dev @commitlint/{cli,config-conventional}
-
-      - name: Set Linting Config to Conventional Commits spec 🔧
         run: |
-          echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+          npm install conventional-changelog-conventionalcommits
+          npm install commitlint@latest
 
-      - name: Lint 🚨
+      - name: Validate current commit (last commit) with commitlint
+        if: github.event_name == 'push'
         run: npx commitlint --from HEAD~1 --to HEAD --verbose
+
+      - name: Validate PR commits with commitlint 🚨
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose

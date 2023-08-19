@@ -1,6 +1,6 @@
 # GFPGAN-ncnn-vulkan 🚀
 
-![CI](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/workflows/CI/badge.svg)
+[![Linux-CI](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/actions/workflows/build_devCI.yml/badge.svg?branch=main)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/actions/workflows/build_devCI.yml)
 ![GitHub](https://img.shields.io/github/license/onuralpszr/GFPGAN-ncnn-vulkan?color=red)
 [![Open issue](https://img.shields.io/github/issues/onuralpszr/GFPGAN-ncnn-vulkan)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/issues)
 [![Closed issue](https://img.shields.io/github/issues-closed/onuralpszr/GFPGAN-ncnn-vulkan)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/issues)
@@ -59,7 +59,7 @@ cmake --build . --parallel $(($(nproc) - 1))
 - [ ] Convert pth->onnx->ncnn
 - [ ] Model with colorization
 
-### Reference
+### References
 1. https://github.com/xinntao/Real-ESRGAN
 2. https://github.com/TencentARC/GFPGAN
 3. https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan
@@ -74,5 +74,7 @@ cmake --build . --parallel $(($(nproc) - 1))
 
 
 ## Download Model files (GFPGAN-ncnn model files)
+
+### Models-v0.0.1
 
 https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/releases/download/v0.0.1-models/GFPGAN-ncnn-models.zip

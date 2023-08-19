@@ -4,7 +4,7 @@
 # https://github.com/onuralpszr/realsr-ncnn-vulkan/blob/vulkan-ci-version/.github/workflows/CI.yml
 
 
-name: CI
+name: Ubuntu-CI
 on: [push, pull_request]
 
 env:

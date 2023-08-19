@@ -65,7 +65,9 @@ cmake --build . --parallel $(($(nproc) - 1))
 3. https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan  
 3. https://github.com/Tencent/ncnn  
 4. https://github.com/deepcam-cn/yolov5-face 
-5. https://github.com/FeiGeChuanShu/GFPGAN-ncnn
+5. https://github.com/derronqi/yolov7-face
+6. https://github.com/derronqi/yolov8-face
+7. https://github.com/FeiGeChuanShu/GFPGAN-ncnn
 
 
 ## Download Model files (GFPGAN-ncnn model files) 

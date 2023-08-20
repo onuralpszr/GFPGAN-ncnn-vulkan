@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.12)
 project(gfpgan-ncnn-vulkan)
 
 set(CMAKE_BUILD_TYPE Release)
@@ -23,17 +23,28 @@ option(USE_SYSTEM_WEBP "build with system libwebp" OFF)
 
 
 find_package(Threads)
+
 find_package(Vulkan REQUIRED)
+
+if (Vulkan_FOUND)
+    message(STATUS "Vulkan_INCLUDE_DIRS: ${Vulkan_INCLUDE_DIRS}")
+    message(STATUS "Vulkan_LIBRARIES: ${Vulkan_LIBRARIES}")
+    message(STATUS "Vulkan_LIBRARY: ${Vulkan_LIBRARY}")
+    message(STATUS "Vulkan_FOUND: ${Vulkan_FOUND}")
+else ()
+    message(FATAL_ERROR "Vulkan Not Found!")
+endif ()
 
 find_program(GLSLANGVALIDATOR_EXECUTABLE NAMES glslangValidator PATHS $ENV{VULKAN_SDK}/bin NO_CMAKE_FIND_ROOT_PATH)
 message(STATUS "Found glslangValidator: ${GLSLANGVALIDATOR_EXECUTABLE}")
 
 find_package(OpenCV REQUIRED)
+
 if (OpenCV_FOUND)
     message(STATUS "OpenCV_LIBS: ${OpenCV_LIBS}")
     message(STATUS "OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS}")
 else ()
-    message(FATAL_ERROR "opencv Not Found!")
+    message(FATAL_ERROR "OpenCV Not Found!")
 endif ()
 
 find_package(OpenMP REQUIRED)
@@ -57,28 +68,37 @@ endif()
 
 if(NOT USE_SYSTEM_NCNN)
     # build ncnn library
-    if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ncnn/CMakeLists.txt")
+    if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/external/ncnn/CMakeLists.txt")
         message(FATAL_ERROR "The submodules were not downloaded! Please update submodules with \"git submodule update --init --recursive\" and try again.")
     endif()
 
+    option(NCNN_VULKAN "vulkan compute support" ON)
+    option(NCNN_THREADS "" ON)
+    option(NCNN_OPENMP "" ON)
+    option(NCNN_VULKAN_ONLINE_SPIRV "" ON)
+
+    option(NCNN_PIXEL "convert and resize from/to image pixel" ON)
+    option(NCNN_PIXEL_ROTATE "rotate image pixel orientation" ON)
+    option(NCNN_PIXEL_AFFINE "warp affine image pixel" ON)
+    option(NCNN_PIXEL_DRAWING "draw basic figure and text" ON)
+    option(NCNN_INT8 "int8 inference" ON)
+    option(NCNN_BF16 "bf16 inference" ON)
+
+
     option(NCNN_INSTALL_SDK "" OFF)
     option(NCNN_PIXEL_ROTATE "" OFF)
-    option(NCNN_VULKAN "" ON)
-    option(NCNN_VULKAN_ONLINE_SPIRV "" ON)
     option(NCNN_BUILD_BENCHMARK "" OFF)
     option(NCNN_BUILD_TESTS "" OFF)
     option(NCNN_BUILD_TOOLS "" OFF)
     option(NCNN_BUILD_EXAMPLES "" OFF)
     option(NCNN_DISABLE_RTTI "" OFF)
     option(NCNN_DISABLE_EXCEPTION "" OFF)
-    option(NCNN_THREADS "" ON)
-    option(NCNN_OPENMP "" ON)
     option(NCNN_SYSTEM_GLSLANG "" OFF)
     option(NCNN_SHARED_LIB "" OFF)
 
 
 
-    add_subdirectory(ncnn)
+    add_subdirectory(external/ncnn)
 endif()
 
 if(USE_SYSTEM_WEBP)
@@ -92,7 +112,7 @@ endif()
 
 if(NOT USE_SYSTEM_WEBP)
     # build libwebp library
-    if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libwebp/CMakeLists.txt")
+    if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/external/libwebp/CMakeLists.txt")
         message(FATAL_ERROR "The submodules were not downloaded! Please update submodules with \"git submodule update --init --recursive\" and try again.")
     endif()
 
@@ -110,9 +130,9 @@ if(NOT USE_SYSTEM_WEBP)
     option(WEBP_NEAR_LOSSLESS "" OFF)
     option(WEBP_ENABLE_SWAP_16BIT_CSP "" OFF)
 
-    add_subdirectory(libwebp)
+    add_subdirectory(external/libwebp)
 
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libwebp/src)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/libwebp/src)
 endif()
 
 set(NCNN_GFPGAN_LINK_LIBRARIES ncnn webp ${Vulkan_LIBRARY})

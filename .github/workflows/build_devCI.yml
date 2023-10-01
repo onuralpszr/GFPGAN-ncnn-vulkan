@@ -37,7 +37,7 @@ jobs:
         Remove-Item .\VulkanSDK\Demos -Recurse
     - name: install opencv
       run: |
-        Invoke-WebRequest -Uri https://github.com/opencv/opencv/releases/download/4.8.0/opencv-4.8.0-windows.exe
+        Invoke-WebRequest -Uri https://github.com/opencv/opencv/releases/download/4.8.0/opencv-4.8.0-windows.exe -OutFile opencv-4.8.0-windows.exe
         7z x -aoa ./opencv-4.8.0-windows.exe -oOpenCV
     - name: build
       run: |

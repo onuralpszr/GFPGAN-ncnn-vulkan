@@ -4,17 +4,54 @@
 # https://github.com/onuralpszr/realsr-ncnn-vulkan/blob/vulkan-ci-version/.github/workflows/CI.yml
 
 
-name: Linux-CI
+name: CI
 on: [push, pull_request]
 
 env:
   APPLICATION_NAME: gfpgan-ncnn-vulkan
 
 jobs:
+  dev-build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+    - name: cache-vulkansdk
+      id: cache-vulkansdk
+      uses: actions/cache@v3.3.2
+      with:
+        path: "VulkanSDK"
+        key: VulkanSDK-1.3.250.1-Installer
+    - name: cache-opencv
+      id: cache-opencv
+      uses: actions/cache@v3.3.2
+      with:
+        path: "OpenCV"
+        key: opencv-4.8.1-windows
+    - name: vulkansdk
+      if: steps.cache-vulkansdk.outputs.cache-hit != 'true'
+      run: |
+        Invoke-WebRequest -Uri https://sdk.lunarg.com/sdk/download/1.3.250.1/windows/VulkanSDK-1.3.250.1-Installer.exe?Human=true -OutFile VulkanSDK-1.3.250.1-Installer.exe
+        7z x -aoa ./VulkanSDK-1.3.250.1-Installer.exe -oVulkanSDK
+        Remove-Item .\VulkanSDK\Demos -Recurse
+    - name: install opencv
+      if: steps.cache-opencv.outputs.cache-hit != 'true'
+      run: |
+        Invoke-WebRequest -Uri https://github.com/opencv/opencv/releases/download/4.8.1/opencv-4.8.1-windows.exe -OutFile opencv-4.8.1-windows.exe
+        7z x -aoa ./opencv-4.8.1-windows.exe -oOpenCV
+    - name: build
+      run: |
+        $env:OpenCV_DIR="$(pwd)/OpenCV/opencv/build"
+        $env:VULKAN_SDK="$(pwd)/VulkanSDK"
+        mkdir build; cd build
+        cmake -A x64 ../src
+        cmake --build . --config Release -j 2
+
   dev-build-ubuntu:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.5.1
+    - uses: actions/checkout@v4
       with:
         submodules: 'recursive'
     - name: cache-vulkansdk

@@ -23,14 +23,25 @@ jobs:
       with:
         path: "VulkanSDK"
         key: VulkanSDK-1.3.250.1-Installer
+    - name: cache-opencv
+      id: cache-opencv
+      uses: actions/cache@v3.3.1
+      with:
+        path: "OpenCV"
+        key: opencv-4.8.0-windows
     - name: vulkansdk
       if: steps.cache-vulkansdk.outputs.cache-hit != 'true'
       run: |
         Invoke-WebRequest -Uri https://sdk.lunarg.com/sdk/download/1.3.250.1/windows/VulkanSDK-1.3.250.1-Installer.exe?Human=true -OutFile VulkanSDK-1.3.250.1-Installer.exe
         7z x -aoa ./VulkanSDK-1.3.250.1-Installer.exe -oVulkanSDK
         Remove-Item .\VulkanSDK\Demos -Recurse
+    - name: install opencv
+      run: |
+        Invoke-WebRequest -Uri https://github.com/opencv/opencv/releases/download/4.8.0/opencv-4.8.0-windows.exe
+        7z x -aoa ./opencv-4.8.0-windows.exe -oOpenCV
     - name: build
       run: |
+        $env:OpenCV_DIR="$(pwd)/OpenCV/opencv/bin"
         $env:VULKAN_SDK="$(pwd)/VulkanSDK"
         mkdir build; cd build
         cmake -A x64 ../src

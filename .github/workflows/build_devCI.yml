@@ -19,16 +19,16 @@ jobs:
         submodules: 'recursive'
     - name: cache-vulkansdk
       id: cache-vulkansdk
-      uses: actions/cache@v3.3.1
+      uses: actions/cache@v3.3.2
       with:
         path: "VulkanSDK"
         key: VulkanSDK-1.3.250.1-Installer
     - name: cache-opencv
       id: cache-opencv
-      uses: actions/cache@v3.3.1
+      uses: actions/cache@v3.3.2
       with:
         path: "OpenCV"
-        key: opencv-4.8.0-windows
+        key: opencv-4.8.1-windows
     - name: vulkansdk
       if: steps.cache-vulkansdk.outputs.cache-hit != 'true'
       run: |
@@ -39,7 +39,7 @@ jobs:
       if: steps.cache-opencv.outputs.cache-hit != 'true'
       run: |
         Invoke-WebRequest -Uri https://github.com/opencv/opencv/releases/download/4.8.1/opencv-4.8.1-windows.exe -OutFile opencv-4.8.1-windows.exe
-        7z x -aoa ./opencv-4.8.0-windows.exe -oOpenCV
+        7z x -aoa ./opencv-4.8.1-windows.exe -oOpenCV
     - name: build
       run: |
         $env:OpenCV_DIR="$(pwd)/OpenCV/opencv/build"

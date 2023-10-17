@@ -19,13 +19,13 @@ jobs:
         submodules: 'recursive'
     - name: cache-vulkansdk
       id: cache-vulkansdk
-      uses: actions/cache@v3.3.2
+      uses: actions/cache@v3
       with:
         path: "VulkanSDK"
         key: VulkanSDK-1.3.250.1-Installer
     - name: cache-opencv
       id: cache-opencv
-      uses: actions/cache@v3.3.2
+      uses: actions/cache@v3
       with:
         path: "OpenCV"
         key: opencv-4.8.1-windows
@@ -56,7 +56,7 @@ jobs:
         submodules: 'recursive'
     - name: cache-vulkansdk
       id: cache-vulkansdk
-      uses: actions/cache@v3.3.1
+      uses: actions/cache@v3
       with:
         path: "1.3.250.1"
         key: vulkansdk-linux-x86_64-1.3.250.1

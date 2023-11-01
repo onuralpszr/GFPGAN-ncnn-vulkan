@@ -23,7 +23,7 @@ option(USE_SYSTEM_WEBP "build with system libwebp" OFF)
 
 
 find_package(Threads)
-
+find_package(OpenMP REQUIRED)
 find_package(Vulkan REQUIRED)
 
 if (Vulkan_FOUND)

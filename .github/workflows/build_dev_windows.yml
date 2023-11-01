@@ -1,0 +1,50 @@
+# CI code is based on
+# https://github.com/nihui/realsr-ncnn-vulkan/blob/master/.github/workflows/release.yml
+# Modified in here for newer vulkan
+# https://github.com/onuralpszr/realsr-ncnn-vulkan/blob/vulkan-ci-version/.github/workflows/CI.yml
+
+
+name: Windows Dev Build
+on: [pull_request]
+
+env:
+  APPLICATION_NAME: gfpgan-ncnn-vulkan
+
+
+jobs:
+  dev-build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+    - name: cache-vulkansdk
+      id: cache-vulkansdk
+      uses: actions/cache@v3
+      with:
+        path: "VulkanSDK"
+        key: VulkanSDK-${{ vars.VULKAN_SDK_VERSION }}-Installer
+    - name: cache-opencv
+      id: cache-opencv
+      uses: actions/cache@v3
+      with:
+        path: "OpenCV"
+        key: opencv-${{ vars.OPENCV_VERSION }}-windows
+    - name: vulkansdk
+      if: steps.cache-vulkansdk.outputs.cache-hit != 'true'
+      run: |
+        Invoke-WebRequest -Uri https://sdk.lunarg.com/sdk/download/${{ vars.VULKAN_SDK_VERSION }}/windows/VulkanSDK-${{ vars.VULKAN_SDK_VERSION }}-Installer.exe?Human=true -OutFile VulkanSDK-${{ vars.VULKAN_SDK_VERSION }}-Installer.exe
+        7z x -aoa ./VulkanSDK-${{ vars.VULKAN_SDK_VERSION }}-Installer.exe -oVulkanSDK
+        Remove-Item .\VulkanSDK\Demos -Recurse
+    - name: install opencv
+      if: steps.cache-opencv.outputs.cache-hit != 'true'
+      run: |
+        Invoke-WebRequest -Uri https://github.com/opencv/opencv/releases/download/${{ vars.OPENCV_VERSION }}/opencv-${{ vars.OPENCV_VERSION }}-windows.exe -OutFile opencv-${{ vars.OPENCV_VERSION }}-windows.exe
+        7z x -aoa ./opencv-${{ vars.OPENCV_VERSION }}-windows.exe -oOpenCV
+    - name: build
+      run: |
+        $env:OpenCV_DIR="$(pwd)/OpenCV/opencv/build"
+        $env:VULKAN_SDK="$(pwd)/VulkanSDK"
+        mkdir build; cd build
+        cmake -A x64 ../src
+        cmake --build . --config Release -j 2

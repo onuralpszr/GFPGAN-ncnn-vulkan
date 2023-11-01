@@ -5,24 +5,29 @@
 
 
 name: Fedora Dev Build (RPM Vulkan)
-on: [push, pull_request]
+on: [pull_request]
 
 env:
   APPLICATION_NAME: gfpgan-ncnn-vulkan
 
 jobs:
-  dev-build-ubuntu:
+  dev-build-fedora-rpm-vulkan:
     runs-on: ubuntu-latest
     container: fedora:latest
     steps:
+      
+    - name: Install dependencies
+      run: |
+        dnf update -y
+        dnf install git opencv-devel opencv python3-opencv \
+          libomp libomp-devel clang cmake gcc gcc-c++ glslang vulkan* -y
+
+        
     - uses: actions/checkout@v4
       with:
         submodules: 'recursive'
     - name: Build
       run: |
-        sudo dnf update -y
-        sudo dnf install opencv-devel opencv python3-opencv \
-          libomp libomp-devel clang cmake gcc gcc-c++ glslang vulkan* -y
         mkdir build && cd build
         cmake ../src
         cmake --build . -j 2

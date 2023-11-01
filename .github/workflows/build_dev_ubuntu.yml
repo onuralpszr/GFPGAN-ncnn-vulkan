@@ -5,7 +5,7 @@
 
 
 name: Ubuntu Dev Build
-on: [push, pull_request]
+on: [pull_request]
 
 env:
   APPLICATION_NAME: gfpgan-ncnn-vulkan
@@ -26,8 +26,8 @@ jobs:
     - name: setup-vulkansdk
       if: steps.cache-vulkansdk.outputs.cache-hit != 'true'
       run: |
-        wget https://sdk.lunarg.com/sdk/download/${{ vars.VULKAN_SDK_VERSION }}/linux/vulkansdk-linux-x86_64-${{ vars.VULKAN_SDK_VERSION }}.tar.gz?Human=true -O vulkansdk-linux-x86_64-${{ vars.VULKAN_SDK_VERSION }}.tar.gz
-        tar -xf vulkansdk-linux-x86_64-${{ vars.VULKAN_SDK_VERSION }}.tar.gz
+        wget https://sdk.lunarg.com/sdk/download/${{ vars.VULKAN_SDK_VERSION }}/linux/vulkansdk-linux-x86_64-${{ vars.VULKAN_SDK_VERSION }}.tar.xz?Human=true -O vulkansdk-linux-x86_64-${{ vars.VULKAN_SDK_VERSION }}.tar.xz
+        tar -xf vulkansdk-linux-x86_64-${{ vars.VULKAN_SDK_VERSION }}.tar.xz
         rm -rf ${{ vars.VULKAN_SDK_VERSION }}/source ${{ vars.VULKAN_SDK_VERSION }}/samples
         find ${{ vars.VULKAN_SDK_VERSION }} -type f | grep -v -E 'vulkan|glslang' | xargs rm
     - name: Build

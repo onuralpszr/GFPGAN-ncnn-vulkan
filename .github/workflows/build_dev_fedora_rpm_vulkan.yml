@@ -1,0 +1,28 @@
+# CI code is based on
+# https://github.com/nihui/realsr-ncnn-vulkan/blob/master/.github/workflows/release.yml
+# Modified in here for newer vulkan
+# https://github.com/onuralpszr/realsr-ncnn-vulkan/blob/vulkan-ci-version/.github/workflows/CI.yml
+
+
+name: Fedora Dev Build (RPM Vulkan)
+on: [push, pull_request]
+
+env:
+  APPLICATION_NAME: gfpgan-ncnn-vulkan
+
+jobs:
+  dev-build-ubuntu:
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+    - name: Build
+      run: |
+        sudo dnf update -y
+        sudo dnf install opencv-devel opencv python3-opencv \
+          libomp libomp-devel clang cmake gcc gcc-c++ glslang vulkan* -y
+        mkdir build && cd build
+        cmake ../src
+        cmake --build . -j 2

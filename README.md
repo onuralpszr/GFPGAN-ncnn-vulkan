@@ -4,6 +4,7 @@
 [![Ubuntu Dev Build](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/actions/workflows/build_dev_ubuntu.yml/badge.svg)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/actions/workflows/build_dev_ubuntu.yml)
 [![Fedora Dev Build (RPM Vulkan)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/actions/workflows/build_dev_fedora_rpm_vulkan.yml/badge.svg)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/actions/workflows/build_dev_fedora_rpm_vulkan.yml)
 [![Fedora Dev Build (Lunar Vulkan SDK)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/actions/workflows/build_dev_fedora_lunar_vulkan.yml/badge.svg)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/actions/workflows/build_dev_fedora_lunar_vulkan.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/onuralpszr/GFPGAN-ncnn-vulkan/main.svg)](https://results.pre-commit.ci/latest/github/onuralpszr/GFPGAN-ncnn-vulkan/main)
 ![GitHub](https://img.shields.io/github/license/onuralpszr/GFPGAN-ncnn-vulkan?color=red)
 [![Open issue](https://img.shields.io/github/issues/onuralpszr/GFPGAN-ncnn-vulkan)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/issues)
 [![Closed issue](https://img.shields.io/github/issues-closed/onuralpszr/GFPGAN-ncnn-vulkan)](https://github.com/onuralpszr/GFPGAN-ncnn-vulkan/issues)

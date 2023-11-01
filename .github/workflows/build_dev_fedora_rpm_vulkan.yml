@@ -15,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     container: fedora:latest
     steps:
-      
+
     - name: Install dependencies
       run: |
         dnf update -y
         dnf install wget curl git opencv-devel opencv python3-opencv \
           libomp libomp-devel clang cmake gcc gcc-c++ glslang vulkan* -y
 
-        
+
     - uses: actions/checkout@v4
       with:
         submodules: 'recursive'

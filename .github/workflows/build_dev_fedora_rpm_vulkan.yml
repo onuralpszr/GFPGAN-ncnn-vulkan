@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         dnf update -y
-        dnf install git opencv-devel opencv python3-opencv \
+        dnf install wget curl git opencv-devel opencv python3-opencv \
           libomp libomp-devel clang cmake gcc gcc-c++ glslang vulkan* -y
 
         

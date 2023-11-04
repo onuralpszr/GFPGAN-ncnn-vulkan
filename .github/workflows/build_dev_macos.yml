@@ -35,7 +35,7 @@ jobs:
         cd openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src
         mkdir build-x86_64 && cd build-x86_64
         cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install -DCMAKE_OSX_ARCHITECTURES="x86_64" \
-            -DLIBOMP_ENABLE_SHARED=OFF -DLIBOMP_OMPT_SUPPORT=OFF -DLIBOMP_USE_HWLOC=OFF ..
+            -DLIBOMP_ENABLE_SHARED=OFF -DENABLE_CHECK_TARGETS=OFF -DLIBOMP_OMPT_SUPPORT=OFF -DLIBOMP_USE_HWLOC=OFF ..
         cmake --build . -j 3
         cmake --build . --target install
     - name: build-arm64
@@ -44,7 +44,7 @@ jobs:
         cd openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src
         mkdir build-arm64 && cd build-arm64
         cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install -DCMAKE_OSX_ARCHITECTURES="arm64" \
-            -DLIBOMP_ENABLE_SHARED=OFF -DLIBOMP_OMPT_SUPPORT=OFF -DLIBOMP_USE_HWLOC=OFF ..
+            -DLIBOMP_ENABLE_SHARED=OFF -DENABLE_CHECK_TARGETS=OFF -DLIBOMP_OMPT_SUPPORT=OFF -DLIBOMP_USE_HWLOC=OFF ..
         cmake --build . -j 3
         cmake --build . --target install
     - name: merge-fat-library

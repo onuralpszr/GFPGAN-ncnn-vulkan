@@ -21,9 +21,25 @@ option(USE_SYSTEM_NCNN "build with system libncnn" OFF)
 option(USE_SYSTEM_WEBP "build with system libwebp" OFF)
 
 
+if(APPLE)
+    find_program(BREW_EXECUTABLE NAMES brew)
+    if(NOT BREW_EXECUTABLE)
+        message(FATAL_ERROR "Brew not found!")
+    endif()
+    execute_process(COMMAND brew --prefix libomp
+    OUTPUT_VARIABLE HOMEBREW_LIBOMP_PREFIX
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+    set(OpenMP_C_FLAGS
+    "-Xpreprocessor -fopenmp -I${HOMEBREW_LIBOMP_PREFIX}/include")
+    set(OpenMP_CXX_FLAGS
+    "-Xpreprocessor -fopenmp -I${HOMEBREW_LIBOMP_PREFIX}/include")
+    set(OpenMP_C_LIB_NAMES omp)
+    set(OpenMP_CXX_LIB_NAMES omp)
+    set(OpenMP_omp_LIBRARY ${HOMEBREW_LIBOMP_PREFIX}/lib/libomp.dylib)
+endif()
 
-find_package(Threads)
 find_package(OpenMP REQUIRED)
+find_package(Threads)
 find_package(Vulkan REQUIRED)
 
 if (Vulkan_FOUND)

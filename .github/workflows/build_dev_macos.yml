@@ -1,0 +1,62 @@
+# CI code is based on
+# https://github.com/nihui/realsr-ncnn-vulkan/blob/master/.github/workflows/release.yml
+# Modified in here for newer vulkan
+# https://github.com/onuralpszr/realsr-ncnn-vulkan/blob/vulkan-ci-version/.github/workflows/CI.yml
+
+
+name: Macos Dev Build
+on: [pull_request]
+
+env:
+  APPLICATION_NAME: gfpgan-ncnn-vulkan
+
+jobs:
+  openmp-macos:
+    runs-on: macos-latest
+    steps:
+    - name: cache-openmp
+      id: cache-openmp
+      uses: actions/cache@v1
+      with:
+        path: openmp-install
+        key: openmp-macos-release-${{ vars.LLVM_PACKAGE_VERSION}}
+    - name: checkout
+      if: steps.cache-openmp.outputs.cache-hit != 'true'
+      uses: actions/checkout@v2
+    - name: openmp
+      if: steps.cache-openmp.outputs.cache-hit != 'true'
+      run: |
+        wget https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ vars.LLVM_PACKAGE_VERSION}}/openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src.tar.xz
+        tar -xf openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src.tar.xz
+        cd openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src
+    - name: build-x86_64
+      if: steps.cache-openmp.outputs.cache-hit != 'true'
+      run: |
+        cd openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src
+        mkdir build-x86_64 && cd build-x86_64
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install -DCMAKE_OSX_ARCHITECTURES="x86_64" \
+            -DLIBOMP_ENABLE_SHARED=OFF -DLIBOMP_OMPT_SUPPORT=OFF -DLIBOMP_USE_HWLOC=OFF ..
+        cmake --build . -j 3
+        cmake --build . --target install
+    - name: build-arm64
+      if: steps.cache-openmp.outputs.cache-hit != 'true'
+      run: |
+        cd openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src
+        mkdir build-arm64 && cd build-arm64
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install -DCMAKE_OSX_ARCHITECTURES="arm64" \
+            -DLIBOMP_ENABLE_SHARED=OFF -DLIBOMP_OMPT_SUPPORT=OFF -DLIBOMP_USE_HWLOC=OFF ..
+        cmake --build . -j 3
+        cmake --build . --target install
+    - name: merge-fat-library
+      if: steps.cache-openmp.outputs.cache-hit != 'true'
+      run: |
+        rm -rf $GITHUB_WORKSPACE/openmp-install
+        mkdir -p $GITHUB_WORKSPACE/openmp-install
+        cp -r openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src/build-x86_64/install/include $GITHUB_WORKSPACE/openmp-install
+        mkdir -p $GITHUB_WORKSPACE/openmp-install/lib
+        lipo -create openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src/build-x86_64/install/lib/libomp.a openmp-${{ vars.LLVM_PACKAGE_VERSION}}.src/build-arm64/install/lib/libomp.a -o $GITHUB_WORKSPACE/openmp-install/lib/libomp.a
+    - name: upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: openmp-macos
+        path: openmp-install

@@ -10,7 +10,7 @@ on: [pull_request]
 env:
   APPLICATION_NAME: gfpgan-ncnn-vulkan
   DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
-  
+
 jobs:
   openmp-macos:
     runs-on: macos-latest

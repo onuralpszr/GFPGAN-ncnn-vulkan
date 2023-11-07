@@ -4,13 +4,13 @@
 # https://github.com/onuralpszr/realsr-ncnn-vulkan/blob/vulkan-ci-version/.github/workflows/CI.yml
 
 
-name: Macos Dev Build
+name: macOS Dev Build
 on: [pull_request]
 
 env:
   APPLICATION_NAME: gfpgan-ncnn-vulkan
   DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
-  
+
 jobs:
   openmp-macos:
     runs-on: macos-latest

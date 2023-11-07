@@ -20,8 +20,9 @@ set(CMAKE_CXX_EXTENSIONS ON)
 option(USE_SYSTEM_NCNN "build with system libncnn" OFF)
 option(USE_SYSTEM_WEBP "build with system libwebp" OFF)
 
+set(USE_OPENMP_SRC OFF)
 
-if(APPLE)
+if(APPLE AND NOT USE_OPENMP_SRC)
     find_program(BREW_EXECUTABLE NAMES brew)
     if(NOT BREW_EXECUTABLE)
         message(FATAL_ERROR "Brew not found!")

@@ -20,13 +20,13 @@ jobs:
         submodules: 'recursive'
     - name: cache-vulkansdk
       id: cache-vulkansdk
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: "VulkanSDK"
         key: VulkanSDK-${{ vars.VULKAN_SDK_VERSION }}-Installer
     - name: cache-opencv
       id: cache-opencv
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: "OpenCV"
         key: opencv-${{ vars.OPENCV_VERSION }}-windows

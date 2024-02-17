@@ -27,7 +27,7 @@ jobs:
         submodules: 'recursive'
     - name: cache-vulkansdk
       id: cache-vulkansdk
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: "${{ vars.VULKAN_SDK_VERSION }}"
         key: vulkansdk-linux-x86_64-${{ vars.VULKAN_SDK_VERSION }}

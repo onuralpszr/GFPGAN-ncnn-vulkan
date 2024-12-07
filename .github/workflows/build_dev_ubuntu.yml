@@ -1,11 +1,9 @@
-# CI code is based on
-# https://github.com/nihui/realsr-ncnn-vulkan/blob/master/.github/workflows/release.yml
-# Modified in here for newer vulkan
-# https://github.com/onuralpszr/realsr-ncnn-vulkan/blob/vulkan-ci-version/.github/workflows/CI.yml
-
-
 name: Ubuntu Dev Build
-on: [pull_request]
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
 
 env:
   APPLICATION_NAME: gfpgan-ncnn-vulkan

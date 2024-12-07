@@ -5,7 +5,11 @@
 
 
 name: Windows Dev Build
-on: [pull_request]
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
 
 env:
   APPLICATION_NAME: gfpgan-ncnn-vulkan

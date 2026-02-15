@@ -21,7 +21,7 @@ jobs:
           libomp libomp-devel clang cmake gcc gcc-c++ glslang vulkan* -y
 
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: 'recursive'
     - name: Build

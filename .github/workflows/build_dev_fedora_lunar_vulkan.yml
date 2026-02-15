@@ -26,7 +26,7 @@ jobs:
         dnf install wget curl git opencv-devel opencv python3-opencv \
           libomp libomp-devel clang cmake gcc gcc-c++ glslang -y
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: 'recursive'
     - name: cache-vulkansdk
